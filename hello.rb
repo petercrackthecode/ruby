@@ -1,0 +1,2 @@
+puts "Fuck the world"
+
