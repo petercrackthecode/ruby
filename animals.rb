@@ -1,29 +1,25 @@
-class Dog
-	attr_reader :name, :age 
-=begin 
-	We only define the reader methods automatically, since we're defining writer
-	methods ourselves.
-=end
-	def name=(value)
-		if value == "" # If "value" is invalid, execution will halt there
+class Animal
+	attr_reader :name, :age
+
+	def name=(newName)
+		if newName == ""
 			raise "Name can't be blank!"
-		end
-		@name= value # This statement won't be reached if "raise" is called
-	end
-
-	def age=(value)
-		if value < 0 # If "value" is invalid, execution will halt here.
-			raise "An age of #{value} isn't valid!"
 		else
-			@age= value	# This statement won't be reached if "raise" is called.
+			@name= newName
 		end
 	end
 
+	def age=(newAge)
+		if newAge <= 0
+			raise "Age is invalid"
+		else
+			@age= newAge
+		end
+	end
 
-=begin
-	so there's only one attr_writer and attr_reader within a class.
-	":name" and ":age" are all symbols.
-=end
+	def move destination
+		puts "#{@name} is running to the #{destination}"
+	end
 
 	def report_age
 		if @name == nil
@@ -39,51 +35,59 @@ class Dog
 		end
 	end
 
+	def to_s
+		"#{@name}, #{@age} #{@age > 1 ? 'years' : 'year'} old"
+	end
+end
+
+class Dog < Animal
 	def talk
 		puts "#{@name} says Bark!"
 	end
 
-	def move(destination)
-		puts "#{@name} is running to the #{destination}."
+	def to_s
+		"#{@name} the dog, #{@age} #{@age > 1 ? 'years' : 'year'} old"
 	end
 end
 
-class Bird 
-	attr_accessor :name, :age
-
-	def report_age
-		puts "#{@name} is #{@age} years old."
-	end
-
+class Bird < Animal
 	def talk
 		puts "#{@name} says Chirp! Chirp!"
 	end
-	def move(destination)
-		puts "#{@name} is flying to the #{destination}."
+
+	def to_s
+		"#{@name} the bird, #{@age} #{@age > 1 ? 'years' : 'year'} old"
 	end
 end
 
-class Cat
-	attr_accessor :name, :age
-
-	def report_age
-		puts "#{@name} is #{@age} years old."
-	end
-
+class Cat < Animal
 	def talk
 		puts "#{@name} says Meow!"
 	end
-	def move(destination)
-		puts "#{@name} is running to the #{destination}."
+
+	def to_s
+		"#{@name} the cat, #{@age} #{@age > 1 ? 'years' : 'year'} old"
 	end
 end
 
-fido= Dog.new
-fido.name= "Harry"
-fido.age= -12
-rex= Dog.new
-rex.name= "Rex"
-rex.age= 3
+class Armadillo < Animal
+	def move(destination, step)
+		if step < 1 
+			raise "Error: Step must be greater than or equal to 1"
+		end
+		puts "#{@name} unrolls!"
+		puts "#{step} #{step > 1 ? "steps" : 'step'}"
+		super(destination)
+		# "super" works as well
+	end
 
-fido.report_age
-rex.report_age
+	def to_s
+		"#{@name} the armadillo, #{@age} #{@age > 1 ? 'years' : 'year'} old"
+	end
+end
+
+lucy= Armadillo.new
+lucy.name= "Lucy"
+lucy.age= 4
+
+lucy.move("Church", 4)

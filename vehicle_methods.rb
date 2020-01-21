@@ -15,34 +15,52 @@ def use_headlights(brightness= 'low-beam')
 end
 =end
 
-def talk(animal_type, name)
-	if animal_type == 'bird'
-		puts "#{name} says Chirp! Chirp!"
-	elsif animal_type == "dog"
-		puts "#{name} says Bark!"
-	elsif animal_type == "cat"
-		puts "#{name} says Meow!"
-	end # The animal type parameter is used to select which string is printed.
+class Vehicle
+	attr_accessor :odometer, :gas_used
+
+	def accelerate
+		puts "Floor it!"
+	end
+
+	def sound_horn
+		puts "Beep! Beep!"
+	end
+
+	def steer
+		puts "Turn front 2 wheels."
+	end
+
+	def mileage
+		return @odometer / @gas_used
+	end
 end
 
-def move(animal_type, name, destination)
-	if animal_type == "bird"
-		puts "#{name} flies to the #{destination}."
-	elsif animal_type == "dog"
-		puts "#{name} runs to the #{destination}."
-	elsif animal_type == "cat"
-		puts "#{name} runs to the #{destination}."
+class Car < Vehicle
+
 end
 
-=begin
-	This method is the same for all animal types, so there's no animal type parameter.
-=end
-def report_age(name, age)
-	puts "#{name} is #{age} years old."
+class Truck < Vehicle
+	attr_accessor :cargo
+
+	def load_bed(contents)
+		puts "Securing #{contents} in the truck bed."
+		@cargo= contents
+	end
 end
 
-move("bird", "Whistler", "tree")
-talk("dog", "Sadie")
-talk("bird", "Whisler")
-move("cat", "Smudge", "house")
-report_age("Smudge", 6)
+class Motorcycle < Vehicle
+	def steer
+		puts "Turn front wheel."
+	end
+end
+
+car= Car.new
+car.odometer= 22914
+car.gas_used= 728
+car.steer
+
+motorcycle= Motorcycle.new
+motorcycle.odometer= 2214
+motorcycle.gas_used= 14
+motorcycle.steer
+motorcycle.accelerate

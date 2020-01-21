@@ -1,15 +1,17 @@
-class MyClass
-	def my_attribute= (new_value)
-		@my_attribute= new_value
-	end
+prices= Array.new(3)
 
-	def my_attribute
-		@my_attribute
-	end
+p prices.length
+
+prices[0]= "Concak"
+prices[1]= "Zeroday"
+prices[2]= "Dollfost"
+prices[3]= "Shiftertoe"
+
+=begin
+for index in 0..2 do
+	print prices[index].to_s + " "
 end
+puts
+=end
 
-my_instance= MyClass.new 
-my_instance.my_attribute= "assigned via method call"
-puts my_instance.my_attribute
-my_instance.my_attribute("same here")
-puts my_instance.my_attribute
+print prices.length
