@@ -1,17 +1,21 @@
-prices= Array.new(3)
-
-p prices.length
-
-prices[0]= "Concak"
-prices[1]= "Zeroday"
-prices[2]= "Dollfost"
-prices[3]= "Shiftertoe"
-
 =begin
-for index in 0..2 do
-	print prices[index].to_s + " "
+def my_method
+	yield 1
+	yield 2
+	yield 3
 end
-puts
+
+my_method	{ |param| puts param }
 =end
 
-print prices.length
+class Array
+	def each
+		index= 0
+		while index < self.length # Remember, "self" refers to the current object- in this case, the current array
+			yield self[index].to_s + " next to a toilet" # The key difference: we yield the current element to a block!
+			index+= 1 # Then, move to the next element, just like before.
+		end
+	end
+end
+
+["Singing", "Dancing", "Eating a pizza"].each{|param| puts param}
