@@ -8,3 +8,4 @@ end
 
 prices= [3.99, 25.00, 8.99]
 puts format("%.2f", total(prices))
+# I am just writing this to make a commit. abc
